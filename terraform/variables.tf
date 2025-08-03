@@ -4,16 +4,31 @@ variable "portainer_token" {
 }
 
 variable "endpoint_id" {
-  type = number
+  type    = number
   default = 3
 }
 
 variable "repository_url" {
-  type = string
+  type    = string
   default = "https://github.com/m1xxos/shisha-server"
 }
 
 variable "repository_reference_name" {
-  type = string
+  type    = string
   default = "refs/heads/main"
+}
+
+variable "filesystem_path" {
+  type    = string
+  default = "/mnt"
+}
+
+variable "CF_DNS_API_TOKEN" {
+  type      = string
+  sensitive = true
+}
+
+variable "CF_API_EMAIL" {
+  type = string
+  sensitive = true
 }

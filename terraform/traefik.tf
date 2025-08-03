@@ -4,22 +4,23 @@ resource "portainer_docker_network" "traefik_proxy" {
 }
 
 resource "portainer_stack" "traefik" {
-  name            = "traefik"
-  method          = "repository"
-  deployment_type = "standalone"
-  endpoint_id     = var.endpoint_id
-  repository_url = var.repository_url
+  name                      = "traefik"
+  method                    = "repository"
+  deployment_type           = "standalone"
+  endpoint_id               = var.endpoint_id
+  repository_url            = var.repository_url
   repository_reference_name = var.repository_reference_name
-  file_path_in_repository = "stacks/traefik/compose.yaml"
+  file_path_in_repository   = "stacks/traefik/compose.yaml"
+  support_relative_path     = true
+  filesystem_path           = var.filesystem_path
 
   env {
     name  = "CF_API_EMAIL"
-    value = "bulynin.misha@gmail.com"
+    value = var.CF_API_EMAIL
   }
-
   env {
-    name  = "ENV_VAR_2"
-    value = "value2"
+    name  = "CF_DNS_API_TOKEN"
+    value = var.CF_DNS_API_TOKEN
   }
 
   depends_on = [portainer_docker_network.traefik_proxy]
