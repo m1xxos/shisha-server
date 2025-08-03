@@ -1,14 +1,16 @@
 resource "portainer_docker_network" "traefik_proxy" {
-  endpoint_id = 3
+  endpoint_id = var.endpoint_id
   name        = "traefik_proxy"
 }
 
 resource "portainer_stack" "traefik" {
   name            = "traefik"
-  method          = "file"
+  method          = "repository"
   deployment_type = "standalone"
-  endpoint_id     = 3
-  stack_file_path = "stacks/traefik.yaml"
+  endpoint_id     = var.endpoint_id
+  repository_url = var.repository_url
+  repository_reference_name = var.repository_reference_name
+  file_path_in_repository = "stacks/traefik/compose.yaml"
 
   env {
     name  = "CF_API_EMAIL"

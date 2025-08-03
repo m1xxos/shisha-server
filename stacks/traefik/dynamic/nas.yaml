@@ -1,0 +1,16 @@
+http:
+  routers:
+    nas:
+      rule: "Host(`nas.home.m1xxos.tech`)"
+      service: "nas"
+      entryPoints:
+      - "websecure"
+      - "web"
+      tls:
+        certresolver: "based"
+
+  services:
+    nas:
+      loadBalancer:
+        servers:
+        - url: "http://192.168.1.138/"

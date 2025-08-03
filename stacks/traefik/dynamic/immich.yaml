@@ -1,0 +1,16 @@
+http:
+  routers:
+    immich:
+      rule: "Host(`photos.m1xxos.tech`) || Host(`photos.home.m1xxos.tech`)"
+      service: "immich"
+      entryPoints:
+      - "websecure"
+      - "web"
+      tls:
+        certresolver: "based"
+
+  services:
+    immich:
+      loadBalancer:
+        servers:
+        - url: "http://192.168.1.138:30041/"
