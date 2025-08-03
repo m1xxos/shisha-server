@@ -1,4 +1,4 @@
 variable "portainer_token" {
-  type = string
+  type      = string
   sensitive = true
 }

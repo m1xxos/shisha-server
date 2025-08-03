@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     portainer = {
-      source = "portainer/portainer"
+      source  = "portainer/portainer"
       version = "1.10.0"
     }
   }
@@ -20,7 +20,7 @@ terraform {
 }
 
 provider "portainer" {
-  endpoint = "https://192.168.1.128:9443"
-  api_key = var.portainer_token
+  endpoint        = "https://192.168.1.128:9443"
+  api_key         = var.portainer_token
   skip_ssl_verify = true
 }
