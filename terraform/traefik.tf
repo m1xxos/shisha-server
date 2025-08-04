@@ -11,7 +11,6 @@ resource "portainer_stack" "traefik" {
   repository_url            = var.repository_url
   repository_reference_name = var.repository_reference_name
   file_path_in_repository   = "stacks/traefik/compose.yaml"
-  support_relative_path     = true
   filesystem_path           = var.filesystem_path
 
   env {
