@@ -12,6 +12,10 @@ resource "portainer_stack" "traefik" {
   repository_reference_name = var.repository_reference_name
   file_path_in_repository   = "stacks/traefik/compose.yaml"
   filesystem_path           = var.filesystem_path
+  stack_webhook             = true
+  update_interval           = var.update_interval
+  pull_image                = true
+  force_update              = true
 
   env {
     name  = "CF_API_EMAIL"

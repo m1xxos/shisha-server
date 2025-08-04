@@ -23,12 +23,17 @@ variable "filesystem_path" {
   default = "/mnt"
 }
 
+variable "update_interval" {
+  type = string
+  default = "5m"
+}
+
 variable "CF_DNS_API_TOKEN" {
   type      = string
   sensitive = true
 }
 
 variable "CF_API_EMAIL" {
-  type = string
+  type      = string
   sensitive = true
 }

@@ -7,4 +7,8 @@ resource "portainer_stack" "arr-stack" {
   repository_reference_name = var.repository_reference_name
   file_path_in_repository   = "stacks/arr-stack/compose.yaml"
   filesystem_path           = var.filesystem_path
+  stack_webhook             = true
+  update_interval           = var.update_interval
+  pull_image                = true
+  force_update              = true
 }
