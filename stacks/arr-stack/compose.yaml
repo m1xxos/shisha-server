@@ -24,6 +24,7 @@ services:
     - "traefik.http.routers.jellyseerr.entrypoints=websecure"
     - "traefik.http.routers.jellyseerr.rule=Host(`jellyseerr.home.m1xxos.tech`) || Host(`jellyseerr.m1xxos.tech`)"
     - "traefik.http.services.jellyseerr.loadbalancer.server.port=5055"
+    - "traefik.http.routers.commafeed.tls.certresolver=based"
 
   radarr:
     image: lscr.io/linuxserver/radarr:5.26.2
@@ -47,6 +48,7 @@ services:
     - "traefik.http.routers.radarr.rule=Host(`radarr.home.m1xxos.tech`)"
     - "traefik.http.routers.radarr.service=radarr"
     - "traefik.http.services.radarr.loadbalancer.server.port=7878"
+    - "traefik.http.routers.commafeed.tls.certresolver=based"
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:4.0.15
@@ -70,6 +72,7 @@ services:
     - "traefik.http.routers.sonarr.service=sonarr"
     - "traefik.http.routers.sonarr.rule=Host(`sonarr.home.m1xxos.tech`)"
     - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
+    - "traefik.http.routers.commafeed.tls.certresolver=based"
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:1.37.0
@@ -91,6 +94,7 @@ services:
     - "traefik.http.routers.prowlarr.service=prowlarr"
     - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.home.m1xxos.tech`)"
     - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
+    - "traefik.http.routers.commafeed.tls.certresolver=based"
 
 volumes:
   jellyseerr-config:
