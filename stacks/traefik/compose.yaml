@@ -26,7 +26,7 @@ services:
     - "8088:8080"
     volumes:
     - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    - "./letsencrypt:/letsencrypt"
+    - "letsencrypt:/letsencrypt"
     - ./dynamic:/etc/traefik/dynamic/:ro
     restart: unless-stopped
     networks:
@@ -40,3 +40,6 @@ networks:
   traefik_proxy:
     external:
       name: traefik_proxy
+
+volumes:
+  letsencrypt:
