@@ -6,8 +6,6 @@ http:
       entryPoints:
       - "websecure"
       - "web"
-      tls:
-        certresolver: "based"
 
   services:
     nas:
