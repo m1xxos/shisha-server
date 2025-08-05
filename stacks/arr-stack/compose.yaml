@@ -37,6 +37,7 @@ services:
     - TZ=Europe/Moscow
     - HTTP_PROXY=${PROXY}
     - HTTPS_PROXY=${PROXY}
+    - NO_PROXY="prowlarr,192.168.1.138"
     expose:
     - 7878
     volumes:
@@ -63,6 +64,7 @@ services:
     - TZ=Europe/Moscow
     - HTTP_PROXY=${PROXY}
     - HTTPS_PROXY=${PROXY}
+    - NO_PROXY="prowlarr,192.168.1.138"
     expose:
     - 8989
     volumes:
