@@ -11,4 +11,9 @@ resource "portainer_stack" "arr-stack" {
   update_interval           = var.update_interval
   pull_image                = true
   force_update              = true
+
+  env {
+    name = "PROXY"
+    value = var.PROXY
+  }
 }

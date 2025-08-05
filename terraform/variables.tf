@@ -37,3 +37,8 @@ variable "CF_API_EMAIL" {
   type      = string
   sensitive = true
 }
+
+variable "PROXY" {
+  type = string
+  sensitive = true
+}

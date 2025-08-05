@@ -35,6 +35,8 @@ services:
     - PUID=568
     - PGID=568
     - TZ=Europe/Moscow
+    - HTTP_PROXY=${PROXY}
+    - HTTPS_PROXY=${PROXY}
     expose:
     - 7878
     volumes:
@@ -44,8 +46,6 @@ services:
     restart: unless-stopped
     networks:
       - proxy
-    dns: 
-    - 9.9.9.9
     labels:
     - "traefik.enable=true"
     - "traefik.http.routers.radarr.entrypoints=websecure"
@@ -61,6 +61,8 @@ services:
     - PUID=568
     - PGID=568
     - TZ=Europe/Moscow
+    - HTTP_PROXY=${PROXY}
+    - HTTPS_PROXY=${PROXY}
     expose:
     - 8989
     volumes:
@@ -70,8 +72,6 @@ services:
     restart: unless-stopped
     networks:
       - proxy
-    dns: 
-    - 9.9.9.9
     labels:
     - "traefik.enable=true"
     - "traefik.http.routers.sonarr.entrypoints=websecure"
