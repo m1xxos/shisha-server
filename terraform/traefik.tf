@@ -15,7 +15,7 @@ resource "portainer_stack" "traefik" {
   stack_webhook             = true
   update_interval           = var.update_interval
   pull_image                = true
-  force_update              = true
+  force_update              = false
 
   env {
     name  = "CF_API_EMAIL"
