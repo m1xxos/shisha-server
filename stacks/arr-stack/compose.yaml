@@ -41,7 +41,7 @@ services:
     - radarr-config:/config
     - movies:/movies #optional
     - downloads:/downloads #optional
-    restart: unless-stopped
+    restart: always
     networks:
       - proxy
     labels:
@@ -65,7 +65,7 @@ services:
     - sonarr-config:/config
     - tvseries:/tv #optional
     - downloads:/downloads #optional
-    restart: unless-stopped
+    restart: always
     networks:
       - proxy
     labels:
