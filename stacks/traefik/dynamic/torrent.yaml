@@ -1,0 +1,14 @@
+http:
+  routers:
+    torrent:
+      rule: "Host(`torrent.home.m1xxos.tech`)"
+      service: "torrent"
+      entryPoints:
+      - "websecure"
+      - "web"
+
+  services:
+    torrent:
+      loadBalancer:
+        servers:
+        - url: "http://192.168.1.138:30024"
