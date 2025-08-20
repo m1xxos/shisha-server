@@ -13,4 +13,5 @@ http:
     nextcloud:
       loadBalancer:
         servers:
-        - url: "http://192.168.1.138:30027"
+        - url: "https://192.168.1.138:30027"
+        serversTransport: my-insecure-transport
