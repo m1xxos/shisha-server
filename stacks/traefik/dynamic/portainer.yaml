@@ -12,3 +12,8 @@ http:
       loadBalancer:
         servers:
         - url: "https://192.168.1.128:9443"
+        serversTransport: my-insecure-transport
+
+  serversTransports:
+    my-insecure-transport:
+      insecureSkipVerify: true
