@@ -1,0 +1,16 @@
+http:
+  routers:
+    nextcloud:
+      rule: "Host(`cloud.m1xxos.tech`) || Host(`cloud.home.m1xxos.tech`)"
+      service: "nextcloud"
+      entryPoints:
+      - "websecure"
+      - "web"
+      tls:
+        certresolver: "based"
+
+  services:
+    nextcloud:
+      loadBalancer:
+        servers:
+        - url: "http://192.168.1.138:30027"

@@ -1,0 +1,14 @@
+http:
+  routers:
+    portainer:
+      rule: "Host(`portainer.home.m1xxos.tech`)"
+      service: "portainer"
+      entryPoints:
+      - "websecure"
+      - "web"
+
+  services:
+    portainer:
+      loadBalancer:
+        servers:
+        - url: "https://192.168.1.128:9443"
