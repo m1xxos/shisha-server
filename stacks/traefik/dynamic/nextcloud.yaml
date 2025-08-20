@@ -3,6 +3,8 @@ http:
     nextcloud:
       rule: "Host(`cloud.m1xxos.tech`) || Host(`cloud.home.m1xxos.tech`)"
       service: "nextcloud"
+      middlewares:
+      - nc-chain
       entryPoints:
       - "websecure"
       - "web"
@@ -14,3 +16,20 @@ http:
       loadBalancer:
         servers:
         - url: "http://192.168.1.138:30027"
+
+  middlewares:
+    nc-redirect:
+      redirectScheme:
+        scheme: https
+
+    nc-secure-headers:
+      headers:
+        hostsProxyHeaders:
+        - "X-Forwarded-Host"
+        referrerPolicy: "same-origin"
+
+    nc-chain:
+      chain:
+        middlewares:
+        - nc-redirect
+        - nc-secure-headers
