@@ -13,6 +13,7 @@ services:
     - "--entryPoints.web.address=:80"
     - "--entryPoints.websecure.address=:443"
     - "--entrypoints.websecure.http.tls=true"
+    - "--entrypoints.websecure.forwardedHeaders.trustedIPs=127.0.0.1/32,10.0.0.0/8,172.16.0.0/12,192.168.0.0/24"
     - "--certificatesresolvers.based.acme.email=bulynin.misha@gmail.com"
     - "--certificatesresolvers.based.acme.storage=/letsencrypt/acme.json"
     - "--certificatesresolvers.based.acme.dnsChallenge.provider=cloudflare"
