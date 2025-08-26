@@ -98,7 +98,7 @@ services:
     - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.home.m1xxos.tech`)"
     - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
     - "traefik.http.routers.prowlarr.tls=true"
-    - "traefik.docker.network=proxy"
+    - "traefik.docker.network=traefik_proxy"
   
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:v3.3.25
