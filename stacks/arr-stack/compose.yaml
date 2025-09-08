@@ -99,20 +99,6 @@ services:
     - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
     - "traefik.http.routers.prowlarr.tls=true"
     - "traefik.docker.network=traefik_proxy"
-  
-  flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:v3.3.25
-    container_name: flaresolverr
-    environment:
-      - LOG_LEVEL=${LOG_LEVEL:-info}
-      - LOG_HTML=${LOG_HTML:-false}
-      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - TZ=Europe/Moscow
-    expose:
-      - "${PORT:-8191}:8191"
-    restart: unless-stopped
-    networks:
-      - arr
 
 volumes:
   jellyseerr-config:
