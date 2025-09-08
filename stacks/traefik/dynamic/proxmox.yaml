@@ -10,10 +10,6 @@ http:
   services:
     proxmox:
       loadBalancer:
-      serversTransport: "pve"
+      serversTransport: "my-insecure-transport"
       servers:
       - url: "https://192.168.1.134:8006"
-
-  serversTransport:
-    pve:
-      insecureSkipVerify: true
