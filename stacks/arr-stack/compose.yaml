@@ -101,7 +101,7 @@ services:
     - "traefik.docker.network=traefik_proxy"
   
   cleanuparr:
-    image: ghcr.io/cleanuparr/cleanuparr:latest
+    image: ghcr.io/cleanuparr/cleanuparr:2.2.3
     container_name: cleanuparr
     restart: unless-stopped
     expose:
