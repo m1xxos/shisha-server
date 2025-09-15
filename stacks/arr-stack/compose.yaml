@@ -99,12 +99,46 @@ services:
     - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
     - "traefik.http.routers.prowlarr.tls=true"
     - "traefik.docker.network=traefik_proxy"
+  
+  cleanuparr:
+    image: ghcr.io/cleanuparr/cleanuparr:latest
+    container_name: cleanuparr
+    restart: unless-stopped
+    expose:
+      - 11011
+    volumes:
+      - cleanuparr-config:/config
+    environment:
+      - PORT=11011
+      - BASE_PATH=
+      - PUID=568
+      - PGID=568
+      - UMASK=022
+      - TZ=Europe/Moscow
+    networks:
+      - proxy
+      - arr
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11011/health"]
+      interval: 30s        # Check every 30 seconds
+      timeout: 10s         # Allow up to 10 seconds for response
+      start_period: 30s    # Wait 30 seconds before first check
+      retries: 3           # Mark unhealthy after 3 consecutive failures
+    labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.cleanuparr.entrypoints=websecure"
+    - "traefik.http.routers.cleanuparr.service=cleanuparr"
+    - "traefik.http.routers.cleanuparr.rule=Host(`cleanuparr.home.m1xxos.tech`)"
+    - "traefik.http.services.cleanuparr.loadbalancer.server.port=11011"
+    - "traefik.http.routers.cleanuparr.tls=true"
+    - "traefik.docker.network=traefik_proxy"
 
 volumes:
   jellyseerr-config:
   radarr-config:
   sonarr-config:
   prowlarr-config:
+  cleanuparr-config:
   tvseries:
     external:
       name: tvseries
