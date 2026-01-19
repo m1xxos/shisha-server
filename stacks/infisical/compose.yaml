@@ -12,7 +12,6 @@ services:
     image: infisical/infisical:v0.155.6 # PIN THIS TO A SPECIFIC TAG
     env_file: 
       - .env
-      - stack.env
     environment:
       - NODE_ENV=production
     networks:
@@ -30,7 +29,6 @@ services:
     container_name: infisical-dev-redis
     env_file: 
       - .env
-      - stack.env
     restart: always
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
@@ -45,7 +43,6 @@ services:
     restart: always
     env_file: 
       - .env
-      - stack.env
     volumes:
       - pg_data:/var/lib/postgresql/data
     networks:
