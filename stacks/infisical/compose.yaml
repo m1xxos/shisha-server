@@ -20,7 +20,6 @@ services:
     - "traefik.enable=true"
     - "traefik.http.routers.infisical.entrypoints=websecure"
     - "traefik.http.routers.infisical.rule=Host(`infisical.home.m1xxos.tech`)"
-    - "traefik.http.routers.infisical.service=infisical"
     - "traefik.http.routers.infisical.tls=true"
 
   redis:
