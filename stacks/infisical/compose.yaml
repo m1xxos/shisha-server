@@ -21,6 +21,7 @@ services:
     - "traefik.enable=true"
     - "traefik.http.routers.infisical.entrypoints=websecure"
     - "traefik.http.routers.infisical.rule=Host(`infisical.home.m1xxos.tech`)"
+    - "traefik.http.services.infisical.loadbalancer.server.port=8080"
     - "traefik.http.routers.infisical.tls=true"
     - "traefik.docker.network=traefik_proxy"
 
