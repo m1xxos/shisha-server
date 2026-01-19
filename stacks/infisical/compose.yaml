@@ -11,8 +11,6 @@ services:
         condition: service_started
     image: infisical/infisical:v0.155.6 # PIN THIS TO A SPECIFIC TAG
     env_file: .env
-    ports:
-      - 80:8080
     environment:
       - NODE_ENV=production
     networks:
