@@ -1,3 +1,15 @@
+resource "random_password" "enc_key" {
+  length = 20
+}
+
+resource "random_password" "auth_secret" {
+  length = 20
+}
+
+resource "random_password" "pg_pass" {
+  length = 20
+}
+
 resource "portainer_stack" "infisical" {
   name                      = "infisical"
   method                    = "repository"
@@ -11,4 +23,17 @@ resource "portainer_stack" "infisical" {
   update_interval           = var.update_interval
   pull_image                = true
   force_update              = false
+  env {
+    name = "ENCRYPTION_KEY"
+    value = random_password.enc_key.result
+  }
+  env {
+    name = "AUTH_SECRET"
+    value = random_password.auth_secret.result
+  }
+  env {
+    name = "POSTGRES_PASSWORD"
+    value = random_password.pg_pass.result
+  }
+
 }

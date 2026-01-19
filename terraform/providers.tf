@@ -4,6 +4,10 @@ terraform {
       source  = "portainer/portainer"
       version = "1.10.0"
     }
+    random = {
+      source = "hashicorp/random"
+      version = "3.8.0"
+    }
   }
   backend "s3" {
     endpoint                    = "https://storage.yandexcloud.net"
