@@ -13,7 +13,7 @@ resource "portainer_stack" "arr-stack" {
   force_update              = false
 
   env {
-    name = "PROXY"
+    name  = "PROXY"
     value = var.PROXY
   }
 }

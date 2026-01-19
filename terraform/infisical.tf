@@ -1,11 +1,3 @@
-resource "random_password" "enc_key" {
-  length = 20
-}
-
-resource "random_password" "auth_secret" {
-  length = 20
-}
-
 resource "random_password" "pg_pass" {
   length = 20
 }
@@ -24,15 +16,15 @@ resource "portainer_stack" "infisical" {
   pull_image                = true
   force_update              = false
   env {
-    name = "ENCRYPTION_KEY"
-    value = random_password.enc_key.result
+    name  = "ENCRYPTION_KEY"
+    value = var.ENCRYPTION_KEY
   }
   env {
-    name = "AUTH_SECRET"
-    value = random_password.auth_secret.result
+    name  = "AUTH_SECRET"
+    value = var.AUTH_SECRET
   }
   env {
-    name = "POSTGRES_PASSWORD"
+    name  = "POSTGRES_PASSWORD"
     value = random_password.pg_pass.result
   }
 

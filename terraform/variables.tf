@@ -24,7 +24,7 @@ variable "filesystem_path" {
 }
 
 variable "update_interval" {
-  type = string
+  type    = string
   default = "5m"
 }
 
@@ -39,6 +39,16 @@ variable "CF_API_EMAIL" {
 }
 
 variable "PROXY" {
-  type = string
+  type      = string
+  sensitive = true
+}
+
+variable "ENCRYPTION_KEY" {
+  type      = string
+  sensitive = true
+}
+
+variable "AUTH_SECRET" {
+  type      = string
   sensitive = true
 }
