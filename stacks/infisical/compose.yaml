@@ -22,6 +22,7 @@ services:
     - "traefik.http.routers.infisical.rule=Host(`infisical.home.m1xxos.tech`)"
     - "traefik.http.services.infisical.loadbalancer.server.port=8080"
     - "traefik.http.routers.infisical.tls=true"
+    - "traefik.docker.network=traefik_proxy"
 
   redis:
     image: redis:8.4.0-alpine
