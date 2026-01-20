@@ -52,3 +52,13 @@ variable "AUTH_SECRET" {
   type      = string
   sensitive = true
 }
+
+variable "CLIENT_ID_GITHUB_LOGIN" {
+  type      = string
+  sensitive = true
+}
+
+variable "CLIENT_SECRET_GITHUB_LOGIN" {
+  type      = string
+  sensitive = true
+}

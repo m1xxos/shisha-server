@@ -27,5 +27,12 @@ resource "portainer_stack" "infisical" {
     name  = "POSTGRES_PASSWORD"
     value = random_password.pg_pass.result
   }
-
+  env {
+    name  = "CLIENT_ID_GITHUB_LOGIN"
+    value = var.CLIENT_ID_GITHUB_LOGIN
+  }
+  env {
+    name  = "CLIENT_SECRET_GITHUB_LOGIN"
+    value = var.CLIENT_SECRET_GITHUB_LOGIN
+  }
 }
