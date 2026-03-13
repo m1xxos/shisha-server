@@ -1,0 +1,16 @@
+http:
+  routers:
+    music:
+      rule: "Host(`music.m1xxos.tech`) || Host(`music.home.m1xxos.tech`)"
+      service: "music"
+      entryPoints:
+      - "websecure"
+      - "web"
+      tls:
+        certresolver: "based"
+
+  services:
+    music:
+      loadBalancer:
+        servers:
+        - url: "http://192.168.1.138:30043/"
