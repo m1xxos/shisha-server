@@ -100,6 +100,32 @@ services:
     - "traefik.http.routers.prowlarr.tls=true"
     - "traefik.docker.network=traefik_proxy"
   
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:3.1.0
+    container_name: lidarr
+    environment:
+    - PUID=568
+    - PGID=568
+    - TZ=Europe/Moscow
+    expose:
+    - 9696
+    volumes:
+    - lidarr-config:/config
+    - music:/music
+    - downloads:/downloads #optional
+    restart: unless-stopped
+    networks:
+      - proxy
+      - arr
+    labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.lidarr.entrypoints=websecure"
+    - "traefik.http.routers.lidarr.service=lidarr"
+    - "traefik.http.routers.lidarr.rule=Host(`lidarr.home.m1xxos.tech`)"
+    - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
+    - "traefik.http.routers.lidarr.tls=true"
+    - "traefik.docker.network=traefik_proxy"
+  
   cleanuparr:
     image: ghcr.io/cleanuparr/cleanuparr:2.2.3
     container_name: cleanuparr
@@ -139,12 +165,16 @@ volumes:
   sonarr-config:
   prowlarr-config:
   cleanuparr-config:
+  lidarr-config:
   tvseries:
     external:
       name: tvseries
   movies:
     external:
       name: movies
+  music:
+    external:
+      name: music
   downloads:
     external:
       name: downloads
