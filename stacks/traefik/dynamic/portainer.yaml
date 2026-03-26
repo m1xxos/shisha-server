@@ -1,7 +1,7 @@
 http:
   routers:
     portainer:
-      rule: "Host(`portainer.home.m1xxos.tech`)"
+      rule: "Host(`portainer.home.m1xxos.online`)"
       service: "portainer"
       entryPoints:
       - "websecure"

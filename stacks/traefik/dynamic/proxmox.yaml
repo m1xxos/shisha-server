@@ -1,7 +1,7 @@
 http:
   routers:
     proxmox:
-      rule: "Host(`proxmox.home.m1xxos.tech`)"
+      rule: "Host(`proxmox.home.m1xxos.online`)"
       service: "proxmox"
       entryPoints:
       - "websecure"

@@ -1,7 +1,7 @@
 http:
   routers:
     torrent:
-      rule: "Host(`torrent.home.m1xxos.tech`)"
+      rule: "Host(`torrent.home.m1xxos.online`)"
       service: "torrent"
       entryPoints:
       - "websecure"
