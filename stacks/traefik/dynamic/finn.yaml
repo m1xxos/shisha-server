@@ -1,7 +1,7 @@
 http:
   routers:
     finn:
-      rule: "Host(`finn.m1xxos.tech`) || Host(`finn.home.m1xxos.tech`)"
+      rule: "Host(`finn.m1xxos.online`) || Host(`finn.home.m1xxos.online`)"
       service: "finn"
       entryPoints:
       - "websecure"

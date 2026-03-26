@@ -1,7 +1,7 @@
 http:
   routers:
     nextcloud:
-      rule: "Host(`cloud.m1xxos.tech`) || Host(`cloud.home.m1xxos.tech`)"
+      rule: "Host(`cloud.m1xxos.online`) || Host(`cloud.home.m1xxos.online`)"
       service: "nextcloud"
       middlewares:
       - nc-chain

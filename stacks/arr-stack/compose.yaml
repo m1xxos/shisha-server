@@ -24,7 +24,7 @@ services:
     labels:
     - "traefik.enable=true"
     - "traefik.http.routers.jellyseerr.entrypoints=websecure"
-    - "traefik.http.routers.jellyseerr.rule=Host(`jellyseerr.home.m1xxos.tech`) || Host(`jellyseerr.m1xxos.tech`)"
+    - "traefik.http.routers.jellyseerr.rule=Host(`jellyseerr.home.m1xxos.online`) || Host(`jellyseerr.m1xxos.online`)"
     - "traefik.http.services.jellyseerr.loadbalancer.server.port=5055"
     - "traefik.http.routers.jellyseerr.tls=true"
 
@@ -47,7 +47,7 @@ services:
     labels:
     - "traefik.enable=true"
     - "traefik.http.routers.radarr.entrypoints=websecure"
-    - "traefik.http.routers.radarr.rule=Host(`radarr.home.m1xxos.tech`)"
+    - "traefik.http.routers.radarr.rule=Host(`radarr.home.m1xxos.online`)"
     - "traefik.http.routers.radarr.service=radarr"
     - "traefik.http.services.radarr.loadbalancer.server.port=7878"
     - "traefik.http.routers.radarr.tls=true"
@@ -72,7 +72,7 @@ services:
     - "traefik.enable=true"
     - "traefik.http.routers.sonarr.entrypoints=websecure"
     - "traefik.http.routers.sonarr.service=sonarr"
-    - "traefik.http.routers.sonarr.rule=Host(`sonarr.home.m1xxos.tech`)"
+    - "traefik.http.routers.sonarr.rule=Host(`sonarr.home.m1xxos.online`)"
     - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
     - "traefik.http.routers.sonarr.tls=true"
 
@@ -95,7 +95,7 @@ services:
     - "traefik.enable=true"
     - "traefik.http.routers.prowlarr.entrypoints=websecure"
     - "traefik.http.routers.prowlarr.service=prowlarr"
-    - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.home.m1xxos.tech`)"
+    - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.home.m1xxos.online`)"
     - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
     - "traefik.http.routers.prowlarr.tls=true"
     - "traefik.docker.network=traefik_proxy"
@@ -121,7 +121,7 @@ services:
     - "traefik.enable=true"
     - "traefik.http.routers.lidarr.entrypoints=websecure"
     - "traefik.http.routers.lidarr.service=lidarr"
-    - "traefik.http.routers.lidarr.rule=Host(`lidarr.home.m1xxos.tech`)"
+    - "traefik.http.routers.lidarr.rule=Host(`lidarr.home.m1xxos.online`)"
     - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
     - "traefik.http.routers.lidarr.tls=true"
     - "traefik.docker.network=traefik_proxy"
@@ -154,7 +154,7 @@ services:
     - "traefik.enable=true"
     - "traefik.http.routers.cleanuparr.entrypoints=websecure"
     - "traefik.http.routers.cleanuparr.service=cleanuparr"
-    - "traefik.http.routers.cleanuparr.rule=Host(`cleanuparr.home.m1xxos.tech`)"
+    - "traefik.http.routers.cleanuparr.rule=Host(`cleanuparr.home.m1xxos.online`)"
     - "traefik.http.services.cleanuparr.loadbalancer.server.port=11011"
     - "traefik.http.routers.cleanuparr.tls=true"
     - "traefik.docker.network=traefik_proxy"

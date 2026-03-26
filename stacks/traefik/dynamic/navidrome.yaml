@@ -1,7 +1,7 @@
 http:
   routers:
     music:
-      rule: "Host(`music.m1xxos.tech`) || Host(`music.home.m1xxos.tech`)"
+      rule: "Host(`music.m1xxos.online`) || Host(`music.home.m1xxos.online`)"
       service: "music"
       entryPoints:
       - "websecure"
