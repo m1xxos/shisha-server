@@ -23,6 +23,7 @@ services:
     - "traefik.http.routers.lms-api.entrypoints=websecure"
     - "traefik.http.routers.lms-api.rule=Host(`api.lms.m1xxos.online`)"
     - "traefik.http.services.lms-api.loadbalancer.server.port=4000"
+    - "traefik.http.routers.lms-api.tls.certresolver=based"
     - "traefik.docker.network=traefik_proxy"
 
   worker:
@@ -59,6 +60,7 @@ services:
     - "traefik.http.routers.lms-web.entrypoints=websecure"
     - "traefik.http.routers.lms-web.rule=Host(`lms.m1xxos.online`)"
     - "traefik.http.services.lms-web.loadbalancer.server.port=3000"
+    - "traefik.http.routers.lms-web.tls.certresolver=based"
     - "traefik.docker.network=traefik_proxy"
 
   redis:
