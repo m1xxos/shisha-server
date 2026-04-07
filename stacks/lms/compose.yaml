@@ -12,7 +12,7 @@ services:
       - "4000"
     networks:
       - lms
-      - traefik_proxy
+      - proxy
     depends_on:
       redis:
         condition: service_started
@@ -50,7 +50,7 @@ services:
       - "3000"
     networks:
       - lms
-      - traefik_proxy
+      - proxy
     depends_on:
       api:
         condition: service_started
