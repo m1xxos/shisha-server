@@ -21,7 +21,7 @@ services:
     labels:
     - "traefik.enable=true"
     - "traefik.http.routers.lms-api.entrypoints=websecure"
-    - "traefik.http.routers.lms-api.rule=Host(`api.lms.m1xxos.online`)"
+    - "traefik.http.routers.lms-api.rule=Host(`lms-api.m1xxos.online`)"
     - "traefik.http.services.lms-api.loadbalancer.server.port=4000"
     - "traefik.http.routers.lms-api.tls.certresolver=based"
     - "traefik.docker.network=traefik_proxy"
