@@ -17,7 +17,7 @@ resource "portainer_stack" "lms" {
   force_update              = true
 
   env {
-    name = "APP_SECRET"
+    name  = "APP_SECRET"
     value = random_password.lms_app.result
   }
 }
