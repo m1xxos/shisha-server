@@ -18,6 +18,7 @@ services:
         labels:
           - "traefik.enable=true"
           - "traefik.http.routers.feishin.entrypoints=websecure"
+          - "traefik.http.services.feishin.loadbalancer.server.port=9180"
           - "traefik.http.routers.feishin.rule=Host(`feishin.home.m1xxos.online`)"
 networks:
   proxy:
