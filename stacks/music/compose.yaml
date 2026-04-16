@@ -33,9 +33,11 @@ services:
       DEFAULT_AUDIO_FORMAT: mp3
       DEFAULT_AUDIO_QUALITY: "320"
       HTTP_TIMEOUT_SECONDS: "20"
+    user: "568:568" 
+    tmpfs:
+      - /data/tmp
     volumes:
       - music:/data/music
-      - tmp:/data/tmp
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.mparser.entrypoints=websecure"
@@ -50,4 +52,3 @@ volumes:
   music:
     external:
       name: music
-  tmp:
