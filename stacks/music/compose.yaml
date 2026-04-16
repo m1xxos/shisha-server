@@ -21,22 +21,33 @@ services:
         - "traefik.http.services.feishin.loadbalancer.server.port=9180"
         - "traefik.http.routers.feishin.rule=Host(`feishin.home.m1xxos.online`)"
   downloader:
+    image: ghcr.io/m1xxos/music-parser:sha-6013d69
     restart: unless-stopped
     expose:
       - 8080
+    networks:
+      - proxy
     environment:
       OUTPUT_ROOT: /data/music
       TMP_ROOT: /data/tmp
       DEFAULT_AUDIO_FORMAT: mp3
       DEFAULT_AUDIO_QUALITY: "320"
       HTTP_TIMEOUT_SECONDS: "20"
-      NAVIDROME_SCAN_URL: ""
-      NAVIDROME_SCAN_TOKEN: ""
-      NAVIDROME_SCAN_HEADER: Authorization
     volumes:
-      - ./data/music:/data/music
-      - ./data/tmp:/data/tmp
+      - music:/data/music
+      - tmp:/data/tmp
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mparser.entrypoints=websecure"
+      - "traefik.http.services.mparser.loadbalancer.server.port=8080"
+      - "traefik.http.routers.mparser.rule=Host(`mparser.home.m1xxos.online`)"
 networks:
   proxy:
     external:
       name: traefik_proxy
+
+volumes:
+  music:
+    external:
+      name: music
+  tmp:
