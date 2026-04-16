@@ -1,25 +1,41 @@
 services:
-    feishin:
-        container_name: feishin
-        image: 'ghcr.io/jeffvli/feishin:1.11'
-        restart: unless-stopped
-        environment:
-          - SERVER_NAME=navidrome # pre-defined server name
-          - SERVER_LOCK=true # When true AND name/type/url are set, only username/password can be toggled
-          - SERVER_TYPE=navidrome # the allowed types are: jellyfin, navidrome, subsonic. These values are case insensitive
-          - SERVER_URL=https://music.home.m1xxos.online # http://address:port or https://address:port
-          - REMOTE_URL=https://music.m1xxos.online # http://address or https://address
-          - LEGACY_AUTHENTICATION=false # When SERVER_LOCK is true, sets the legacy (plaintext) authentication flag for Subsonic/OpenSubsonic servers
-          - ANALYTICS_DISABLED=true # Set to true to disable Umami analytics tracking
-        expose:
-          - 9180
-        networks:
-          - proxy
-        labels:
-          - "traefik.enable=true"
-          - "traefik.http.routers.feishin.entrypoints=websecure"
-          - "traefik.http.services.feishin.loadbalancer.server.port=9180"
-          - "traefik.http.routers.feishin.rule=Host(`feishin.home.m1xxos.online`)"
+  feishin:
+      container_name: feishin
+      image: 'ghcr.io/jeffvli/feishin:1.11'
+      restart: unless-stopped
+      environment:
+        - SERVER_NAME=navidrome # pre-defined server name
+        - SERVER_LOCK=true # When true AND name/type/url are set, only username/password can be toggled
+        - SERVER_TYPE=navidrome # the allowed types are: jellyfin, navidrome, subsonic. These values are case insensitive
+        - SERVER_URL=https://music.home.m1xxos.online # http://address:port or https://address:port
+        - REMOTE_URL=https://music.m1xxos.online # http://address or https://address
+        - LEGACY_AUTHENTICATION=false # When SERVER_LOCK is true, sets the legacy (plaintext) authentication flag for Subsonic/OpenSubsonic servers
+        - ANALYTICS_DISABLED=true # Set to true to disable Umami analytics tracking
+      expose:
+        - 9180
+      networks:
+        - proxy
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.feishin.entrypoints=websecure"
+        - "traefik.http.services.feishin.loadbalancer.server.port=9180"
+        - "traefik.http.routers.feishin.rule=Host(`feishin.home.m1xxos.online`)"
+  downloader:
+    restart: unless-stopped
+    expose:
+      - 8080
+    environment:
+      OUTPUT_ROOT: /data/music
+      TMP_ROOT: /data/tmp
+      DEFAULT_AUDIO_FORMAT: mp3
+      DEFAULT_AUDIO_QUALITY: "320"
+      HTTP_TIMEOUT_SECONDS: "20"
+      NAVIDROME_SCAN_URL: ""
+      NAVIDROME_SCAN_TOKEN: ""
+      NAVIDROME_SCAN_HEADER: Authorization
+    volumes:
+      - ./data/music:/data/music
+      - ./data/tmp:/data/tmp
 networks:
   proxy:
     external:
