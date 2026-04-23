@@ -42,3 +42,4 @@ __pycache__/
 # Env files with secrets
 stack.env
 .DS_Store
+.DS_Store
