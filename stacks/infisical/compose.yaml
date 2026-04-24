@@ -9,7 +9,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
-    image: infisical/infisical:v0.159.21 # PIN THIS TO A SPECIFIC TAG
+    image: infisical/infisical:v0.159.22 # PIN THIS TO A SPECIFIC TAG
     env_file: 
       - .env
     environment:
