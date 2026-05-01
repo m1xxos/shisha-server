@@ -2,11 +2,11 @@ terraform {
   required_providers {
     portainer = {
       source  = "portainer/portainer"
-      version = "1.10.0"
+      version = "1.29.0"
     }
     random = {
       source  = "hashicorp/random"
-      version = "3.8.0"
+      version = "3.8.1"
     }
   }
   backend "s3" {
