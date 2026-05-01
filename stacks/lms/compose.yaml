@@ -71,9 +71,13 @@ services:
       - "6379"
     networks:
       - lms
+    volumes:
+      - redis_data:/data
 
 volumes:
   exports_data:
+  redis_data:
+    name: lms_redis_data
 
 networks:
   proxy:
