@@ -39,7 +39,7 @@ services:
     volumes:
       - slskd-data:/app
       - music:/music
-    restart: always
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.slskd.entrypoints=websecure"
