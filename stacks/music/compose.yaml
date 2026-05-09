@@ -23,12 +23,36 @@ services:
       - "traefik.http.routers.mparser.entrypoints=websecure"
       - "traefik.http.services.mparser.loadbalancer.server.port=8080"
       - "traefik.http.routers.mparser.rule=Host(`mparser.home.m1xxos.online`)"
+  slskd:
+    image: slskd/slskd:0.25.1
+    container_name: slskd
+    user: "568:568"
+    ports:
+      - "50300:50300"
+    expose:
+      - 5030
+    networks:
+      - proxy
+    environment:
+      - SLSKD_REMOTE_CONFIGURATION=true
+      - SLSKD_SHARED_DIR=/music;/ebooks
+    volumes:
+      - slskd-data:/app
+      - music:/music
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.slskd.entrypoints=websecure"
+      - "traefik.http.services.slskd.loadbalancer.server.port=5030"
+      - "traefik.http.routers.slskd.rule=Host(`slskd.home.m1xxos.online`)"
+
 networks:
   proxy:
     external:
       name: traefik_proxy
 
 volumes:
+  slskd-data:
   music:
     external:
       name: music
