@@ -35,7 +35,8 @@ services:
       - proxy
     environment:
       - SLSKD_REMOTE_CONFIGURATION=true
-      - SLSKD_SHARED_DIR=/music;/ebooks
+      - SLSKD_SHARED_DIR=/music
+      - SLSKD_DOWNLOADS_DIR=/music/slskd
     volumes:
       - slskd-data:/app
       - music:/music
