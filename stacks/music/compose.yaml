@@ -47,11 +47,13 @@ services:
       - "traefik.http.services.slskd.loadbalancer.server.port=5030"
       - "traefik.http.routers.slskd.rule=Host(`slskd.home.m1xxos.online`)"
   explo:
-    image: ghcr.io/lumepart/explo:latest
+    image: ghcr.io/lumepart/explo:v1.0.1
     restart: unless-stopped
     container_name: explo
     expose:
       - "7288"
+    networks:
+      - proxy
     volumes:
       - explo-env:/opt/explo/.env
       - explo-config:/opt/explo/config # required — stores playlist cache and cover art
