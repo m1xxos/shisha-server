@@ -46,6 +46,28 @@ services:
       - "traefik.http.routers.slskd.entrypoints=websecure"
       - "traefik.http.services.slskd.loadbalancer.server.port=5030"
       - "traefik.http.routers.slskd.rule=Host(`slskd.home.m1xxos.online`)"
+  explo:
+    image: ghcr.io/lumepart/explo:latest
+    restart: unless-stopped
+    container_name: explo
+    ports:
+      - "7288:7288"
+    volumes:
+      - ./explo/.env:/opt/explo/.env
+      - explo-config:/opt/explo/config # required — stores playlist cache and cover art
+      - music/explo:/data/ # has to be in the same path you have your music system pointed to (it's recommended to put explo under a subfolder)
+      - music/slskd:/slskd/ # if using slskd
+    environment:
+      - TZ=UTC # Change this to the timezone set in ListenBrainz (default is UTC)
+      - WEB_UI=true
+      # Web UI credentials (required for login)
+      - UI_USERNAME=m1xxos
+      - UI_PASSWORD=${EXPLO_PASS}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.explo.entrypoints=websecure"
+      - "traefik.http.services.explo.loadbalancer.server.port=5030"
+      - "traefik.http.routers.explo.rule=Host(`explo.home.m1xxos.online`)"
 
 networks:
   proxy:
@@ -54,6 +76,7 @@ networks:
 
 volumes:
   slskd-data:
+  explo-config:
   music:
     external:
       name: music

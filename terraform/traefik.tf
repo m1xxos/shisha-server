@@ -1,6 +1,7 @@
 resource "portainer_docker_network" "traefik_proxy" {
   endpoint_id = var.endpoint_id
   name        = "traefik_proxy"
+  enable_ipv4 = true
 }
 
 resource "portainer_stack" "traefik" {
@@ -16,6 +17,7 @@ resource "portainer_stack" "traefik" {
   update_interval           = var.update_interval
   pull_image                = true
   force_update              = false
+  support_relative_path     = true
 
   env {
     name  = "CF_API_EMAIL"

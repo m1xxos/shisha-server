@@ -11,4 +11,8 @@ resource "portainer_stack" "music" {
   update_interval           = var.update_interval
   pull_image                = true
   force_update              = false
+  env {
+    name  = "EXPLO_PASS"
+    value = var.EXPLO_PASS
+  }
 }

@@ -62,3 +62,8 @@ variable "CLIENT_SECRET_GITHUB_LOGIN" {
   type      = string
   sensitive = true
 }
+
+variable "EXPLO_PASS" {
+  type      = string
+  sensitive = true
+}
