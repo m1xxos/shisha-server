@@ -50,6 +50,7 @@ services:
     image: ghcr.io/lumepart/explo:v1.0.1
     restart: unless-stopped
     container_name: explo
+    user: "568:568"
     expose:
       - "7288"
     networks:
