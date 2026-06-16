@@ -47,7 +47,7 @@ services:
       - "traefik.http.services.slskd.loadbalancer.server.port=5030"
       - "traefik.http.routers.slskd.rule=Host(`slskd.home.m1xxos.online`)"
   explo:
-    image: ghcr.io/lumepart/explo:v1.1.0
+    image: ghcr.io/lumepart/explo:v1.1.1
     restart: unless-stopped
     container_name: explo
     expose:
