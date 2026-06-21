@@ -1,0 +1,72 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: games-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-gamechecker}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gamechecker}
+      POSTGRES_DB: ${POSTGRES_DB:-gamechecker}
+    volumes:
+      - games-pgdata:/var/lib/postgresql/data
+    networks:
+      - games
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-gamechecker}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # One-shot: applies Prisma migrations, then exits. `web` waits for success.
+  migrate:
+    image: ghcr.io/${GHCR_OWNER:-m1xxos}/game-checker-migrate:${IMAGE_TAG:-latest}
+    container_name: games-migrate
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-gamechecker}:${POSTGRES_PASSWORD:-gamechecker}@db:5432/${POSTGRES_DB:-gamechecker}?schema=public
+    networks:
+      - games
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  web:
+    image: ghcr.io/${GHCR_OWNER:-m1xxos}/game-checker:${IMAGE_TAG:-latest}
+    container_name: games-web
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-gamechecker}:${POSTGRES_PASSWORD:-gamechecker}@db:5432/${POSTGRES_DB:-gamechecker}?schema=public
+      AUTH_SECRET: ${AUTH_SECRET}
+      AUTH_URL: ${AUTH_URL:-https://games.home.m1xxos.online}
+      AUTH_TRUST_HOST: "true"
+      AUTH_GITHUB_ID: ${AUTH_GITHUB_ID:-}
+      AUTH_GITHUB_SECRET: ${AUTH_GITHUB_SECRET:-}
+      AUTH_GOOGLE_ID: ${AUTH_GOOGLE_ID:-}
+      AUTH_GOOGLE_SECRET: ${AUTH_GOOGLE_SECRET:-}
+      EMUREADY_BASE_URL: ${EMUREADY_BASE_URL:-https://www.emuready.com/api/mobile/trpc}
+    networks:
+      - games
+      - proxy
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.games.entrypoints=websecure"
+      - "traefik.http.routers.games.rule=Host(`games.home.m1xxos.online`)"
+      - "traefik.http.services.games.loadbalancer.server.port=3000"
+      - "traefik.http.routers.games.tls=true"
+      - "traefik.docker.network=traefik_proxy"
+
+volumes:
+  games-pgdata:
+
+networks:
+  proxy:
+    external:
+      name: traefik_proxy
+  games:
