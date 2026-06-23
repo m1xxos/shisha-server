@@ -38,16 +38,10 @@ services:
     depends_on:
       redis:
         condition: service_healthy
-    # No config file is mounted: everything is configured via SEARXNG_* env
-    # vars below (secret/base URL come from Terraform). The image keeps its
-    # own /etc/searxng on an anonymous volume.
     environment:
       SEARXNG_BASE_URL: ${SEARXNG_BASE_URL:-https://search.home.m1xxos.online/}
       SEARXNG_SECRET: ${SEARXNG_SECRET:?provided by Terraform (terraform/searxng.tf)}
       SEARXNG_VALKEY_URL: valkey://redis:6379/0
-      SEARXNG_LIMITER: "true"
-      SEARXNG_IMAGE_PROXY: "true"
-    # SearXNG needs these to drop privileges to the searxng user at startup.
     cap_drop:
       - ALL
     cap_add:
