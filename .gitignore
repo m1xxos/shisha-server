@@ -41,5 +41,6 @@ __pycache__/
 
 # Env files with secrets
 stack.env
+stacks/searxng/.env
 .DS_Store
 .DS_Store
