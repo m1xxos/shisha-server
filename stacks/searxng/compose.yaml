@@ -27,7 +27,7 @@ services:
         max-file: "1"
 
   searxng:
-    image: searxng/searxng:latest
+    image: searxng/searxng:2026.6.8-f3fab143b@sha256:02d441bbb647b7be422d21041420115cddadac4644368f67c7c7f407bbe72e22
     container_name: searxng
     restart: unless-stopped
     expose:
