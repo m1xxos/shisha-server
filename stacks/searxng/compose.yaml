@@ -1,0 +1,79 @@
+services:
+  redis:
+    image: valkey/valkey:8-alpine
+    container_name: searxng-redis
+    command: valkey-server --save 30 1 --loglevel warning
+    restart: unless-stopped
+    networks:
+      - searxng
+    volumes:
+      - valkey-data:/data
+    # Run with the minimum capabilities valkey needs.
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    logging:
+      driver: json-file
+      options:
+        max-size: "1m"
+        max-file: "1"
+
+  searxng:
+    image: searxng/searxng:2026.6.8-f3fab143b@sha256:02d441bbb647b7be422d21041420115cddadac4644368f67c7c7f407bbe72e22
+    container_name: searxng
+    restart: unless-stopped
+    expose:
+      - "8080"
+    networks:
+      - searxng
+      - proxy
+    depends_on:
+      redis:
+        condition: service_healthy
+    # No config file is mounted: everything is configured via SEARXNG_* env
+    # vars below (secret/base URL come from Terraform). The image keeps its
+    # own /etc/searxng on an anonymous volume.
+    environment:
+      SEARXNG_BASE_URL: ${SEARXNG_BASE_URL:-https://search.home.m1xxos.online/}
+      SEARXNG_SECRET: ${SEARXNG_SECRET:?provided by Terraform (terraform/searxng.tf)}
+      SEARXNG_VALKEY_URL: valkey://redis:6379/0
+      SEARXNG_LIMITER: "true"
+      SEARXNG_IMAGE_PROXY: "true"
+    # SearXNG needs these to drop privileges to the searxng user at startup.
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
+    logging:
+      driver: json-file
+      options:
+        max-size: "1m"
+        max-file: "1"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.searxng.entrypoints=websecure"
+      - "traefik.http.routers.searxng.rule=Host(`search.home.m1xxos.online`) || Host(`search.m1xxos.online`)"
+      - "traefik.http.services.searxng.loadbalancer.server.port=8080"
+      - "traefik.http.routers.searxng.tls=true"
+      - "traefik.http.routers.searxng.tls.certresolver=based"
+      - "traefik.docker.network=traefik_proxy"
+
+volumes:
+  valkey-data:
+
+networks:
+  proxy:
+    external:
+      name: traefik_proxy
+  searxng:
