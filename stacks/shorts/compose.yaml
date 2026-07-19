@@ -1,0 +1,26 @@
+services:
+  web:
+    image: ghcr.io/${GHCR_OWNER:-m1xxos}/magshorts:${IMAGE_TAG:-latest}
+    container_name: shorts-web
+    restart: unless-stopped
+    expose:
+      - "3000"
+    volumes:
+      - shorts-data:/data
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.shorts.entrypoints=websecure"
+      - "traefik.http.routers.shorts.rule=Host(`shorts.home.m1xxos.online`)"
+      - "traefik.http.services.shorts.loadbalancer.server.port=3000"
+      - "traefik.http.routers.shorts.tls=true"
+      - "traefik.docker.network=traefik_proxy"
+
+volumes:
+  shorts-data:
+
+networks:
+  proxy:
+    external:
+      name: traefik_proxy
