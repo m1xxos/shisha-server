@@ -24,7 +24,7 @@ services:
       - "traefik.http.services.mparser.loadbalancer.server.port=8080"
       - "traefik.http.routers.mparser.rule=Host(`mparser.home.m1xxos.online`)"
   slskd:
-    image: slskd/slskd:0.25.1
+    image: slskd/slskd:0.26.0
     container_name: slskd
     user: "568:568"
     ports:
@@ -47,7 +47,7 @@ services:
       - "traefik.http.services.slskd.loadbalancer.server.port=5030"
       - "traefik.http.routers.slskd.rule=Host(`slskd.home.m1xxos.online`)"
   explo:
-    image: ghcr.io/lumepart/explo:v1.1.2
+    image: ghcr.io/lumepart/explo:v1.1.3
     restart: unless-stopped
     container_name: explo
     expose:
