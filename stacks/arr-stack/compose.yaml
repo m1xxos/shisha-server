@@ -1,6 +1,6 @@
 services:
   jellyseerr:
-    image: ghcr.io/seerr-team/seerr:v3.3.0
+    image: ghcr.io/seerr-team/seerr:v3.4.1
     container_name: jellyseerr
     environment:
     - LOG_LEVEL=debug
@@ -127,7 +127,7 @@ services:
     - "traefik.docker.network=traefik_proxy"
   
   cleanuparr:
-    image: ghcr.io/cleanuparr/cleanuparr:2.9.16
+    image: ghcr.io/cleanuparr/cleanuparr:2.10.2
     container_name: cleanuparr
     restart: unless-stopped
     expose:
