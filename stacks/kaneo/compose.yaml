@@ -32,7 +32,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      KANEO_CLIENT_URL: https://kane.home.m1xxos.online
+      KANEO_CLIENT_URL: https://kaneo.home.m1xxos.online
       DATABASE_URL: postgresql://kaneo:${POSTGRES_PASSWORD:?provided by Terraform (terraform/kaneo.tf)}@db:5432/kaneo
       AUTH_SECRET: ${AUTH_SECRET_KANEO:?provided by Terraform (terraform/kaneo.tf)}
     networks:
@@ -52,7 +52,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.kaneo.entrypoints=websecure"
-      - "traefik.http.routers.kaneo.rule=Host(`kane.home.m1xxos.online`)"
+      - "traefik.http.routers.kaneo.rule=Host(`kaneo.home.m1xxos.online`)"
       - "traefik.http.services.kaneo.loadbalancer.server.port=5173"
       - "traefik.http.routers.kaneo.tls=true"
       - "traefik.docker.network=traefik_proxy"
