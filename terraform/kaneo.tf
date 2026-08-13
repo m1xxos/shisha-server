@@ -13,11 +13,6 @@ resource "random_password" "kaneo_github_webhook_secret" {
   special = false
 }
 
-output "kaneo_github_webhook_secret" {
-  value     = random_password.kaneo_github_webhook_secret.result
-  sensitive = true
-}
-
 resource "portainer_stack" "kaneo" {
   name                      = "kaneo"
   method                    = "repository"
