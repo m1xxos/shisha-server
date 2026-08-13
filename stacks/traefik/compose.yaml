@@ -17,6 +17,9 @@ services:
     - "--certificatesresolvers.based.acme.email=bulynin.misha@gmail.com"
     - "--certificatesresolvers.based.acme.storage=/letsencrypt/acme.json"
     - "--certificatesresolvers.based.acme.dnsChallenge.provider=cloudflare"
+    # resolve propagation checks against public DNS; the docker embedded
+    # resolver (127.0.0.11) answers NXDOMAIN for _acme-challenge records
+    - "--certificatesresolvers.based.acme.dnsChallenge.resolvers=1.1.1.1:53,8.8.8.8:53"
     - "--metrics.prometheus=true"
     - "--accesslog=true"
     env_file:
