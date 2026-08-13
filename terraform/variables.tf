@@ -67,3 +67,20 @@ variable "EXPLO_PASS" {
   type      = string
   sensitive = true
 }
+
+variable "GITHUB_APP_ID_KANEO" {
+  type      = string
+  sensitive = true
+  default   = ""
+}
+
+variable "GITHUB_APP_NAME_KANEO" {
+  type    = string
+  default = ""
+}
+
+variable "GITHUB_PRIVATE_KEY_BASE64_KANEO" {
+  type      = string
+  sensitive = true
+  default   = ""
+}

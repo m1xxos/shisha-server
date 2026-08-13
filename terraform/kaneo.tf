@@ -8,6 +8,16 @@ resource "random_password" "kaneo_auth_secret" {
   special = false
 }
 
+resource "random_password" "kaneo_github_webhook_secret" {
+  length  = 40
+  special = false
+}
+
+output "kaneo_github_webhook_secret" {
+  value     = random_password.kaneo_github_webhook_secret.result
+  sensitive = true
+}
+
 resource "portainer_stack" "kaneo" {
   name                      = "kaneo"
   method                    = "repository"
@@ -30,5 +40,25 @@ resource "portainer_stack" "kaneo" {
   env {
     name  = "AUTH_SECRET_KANEO"
     value = random_password.kaneo_auth_secret.result
+  }
+
+  env {
+    name  = "GITHUB_WEBHOOK_SECRET_KANEO"
+    value = random_password.kaneo_github_webhook_secret.result
+  }
+
+  env {
+    name  = "GITHUB_APP_ID_KANEO"
+    value = var.GITHUB_APP_ID_KANEO
+  }
+
+  env {
+    name  = "GITHUB_APP_NAME_KANEO"
+    value = var.GITHUB_APP_NAME_KANEO
+  }
+
+  env {
+    name  = "GITHUB_PRIVATE_KEY_BASE64_KANEO"
+    value = var.GITHUB_PRIVATE_KEY_BASE64_KANEO
   }
 }
