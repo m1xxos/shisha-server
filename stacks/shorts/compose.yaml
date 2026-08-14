@@ -9,6 +9,26 @@ services:
       - shorts-data:/data
     networks:
       - proxy
+    environment:
+      # Digest annotations. Values come from the stack's environment in
+      # Portainer, never from this file — LLM_GROQ_KEY is a secret. All unset
+      # means the digest still builds, with extractive summaries instead.
+      LLM_PROVIDERS: ${LLM_PROVIDERS:-}
+      LLM_GROQ_KEY: ${LLM_GROQ_KEY:-}
+      # Groq geo-blocks and answers 403 without this. Only provider calls are
+      # routed through it; feeds and covers keep going out directly.
+      LLM_PROXY_URL: ${LLM_PROXY_URL:-}
+      # Ranking runs on a second model so it gets its own tokens-per-minute
+      # budget instead of competing with the annotations.
+      LLM_RANK_PROVIDERS: ${LLM_RANK_PROVIDERS:-}
+      LLM_GROQ_SMALL_URL: ${LLM_GROQ_SMALL_URL:-}
+      LLM_GROQ_SMALL_MODEL: ${LLM_GROQ_SMALL_MODEL:-}
+      LLM_GROQ_SMALL_KEY: ${LLM_GROQ_SMALL_KEY:-}
+      # A container's clock is UTC, so an 08:00 digest would land at 11:00 in
+      # Moscow unless this says otherwise.
+      DIGEST_TZ: ${DIGEST_TZ:-}
+      DIGEST_DAILY_AT: ${DIGEST_DAILY_AT:-}
+      DIGEST_WEEKLY_AT: ${DIGEST_WEEKLY_AT:-}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.shorts.entrypoints=websecure"
