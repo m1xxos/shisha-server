@@ -11,4 +11,47 @@ resource "portainer_stack" "shorts" {
   update_interval           = var.update_interval
   pull_image                = true
   force_update              = false
+
+  # The digest writes its card blurbs with a language model. All of this is
+  # optional — with LLM_GROQ_KEY empty the digest still builds and falls back
+  # to the articles' own opening lines.
+  env {
+    name  = "LLM_PROVIDERS"
+    value = var.LLM_GROQ_KEY == "" ? "" : "groq"
+  }
+
+  env {
+    name  = "LLM_GROQ_KEY"
+    value = var.LLM_GROQ_KEY
+  }
+
+  # Groq geo-blocks and answers 403 without this. Only the provider calls are
+  # routed through it; feeds and article covers keep going out directly.
+  env {
+    name  = "LLM_PROXY_URL"
+    value = var.PROXY
+  }
+
+  # Ranking the shortlist is one large prompt rather than several small ones,
+  # and Groq meters tokens per model — so it runs on a second model and gets a
+  # budget of its own instead of competing with the annotations.
+  env {
+    name  = "LLM_RANK_PROVIDERS"
+    value = var.LLM_GROQ_KEY == "" ? "" : "groq-small"
+  }
+
+  env {
+    name  = "LLM_GROQ_SMALL_URL"
+    value = "https://api.groq.com/openai/v1"
+  }
+
+  env {
+    name  = "LLM_GROQ_SMALL_MODEL"
+    value = "llama-3.1-8b-instant"
+  }
+
+  env {
+    name  = "LLM_GROQ_SMALL_KEY"
+    value = var.LLM_GROQ_KEY
+  }
 }

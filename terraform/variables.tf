@@ -84,3 +84,11 @@ variable "GITHUB_PRIVATE_KEY_BASE64_KANEO" {
   sensitive = true
   default   = ""
 }
+
+# Groq API key for the magShorts digest annotations. Empty is fine: the digest
+# still builds, with extractive summaries instead of written ones.
+variable "LLM_GROQ_KEY" {
+  type      = string
+  sensitive = true
+  default   = ""
+}
