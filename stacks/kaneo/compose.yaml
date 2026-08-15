@@ -23,7 +23,7 @@ services:
         max-file: "1"
 
   kaneo:
-    image: ghcr.io/usekaneo/kaneo:2.16.3
+    image: ghcr.io/usekaneo/kaneo:2.19.0
     container_name: kaneo
     restart: unless-stopped
     expose:
