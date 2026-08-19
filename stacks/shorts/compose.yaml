@@ -16,8 +16,12 @@ services:
       LLM_PROVIDERS: ${LLM_PROVIDERS:-}
       LLM_GROQ_KEY: ${LLM_GROQ_KEY:-}
       # Groq geo-blocks and answers 403 without this. Only provider calls are
-      # routed through it; feeds and covers keep going out directly.
+      # routed through it.
       LLM_PROXY_URL: ${LLM_PROXY_URL:-}
+      # Feeds and article pages go out directly and fall back to this only when
+      # the connection fails outright — which, from here, is a standing state
+      # for a dozen publications rather than a rare one.
+      FEED_PROXY_URL: ${FEED_PROXY_URL:-}
       # Ranking runs on a second model so it gets its own tokens-per-minute
       # budget instead of competing with the annotations.
       LLM_RANK_PROVIDERS: ${LLM_RANK_PROVIDERS:-}

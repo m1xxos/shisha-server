@@ -69,4 +69,15 @@ resource "portainer_stack" "shorts" {
     name  = "DIGEST_TZ"
     value = "Europe/Moscow"
   }
+
+  # Eleven feeds fail on every refresh from this host — Harper's, the
+  # Cloudflare blog, half the Substacks — not with a 403 but with a connection
+  # that never completes. The app has always fallen back to a proxy for those;
+  # it had nothing to fall back to, because only the LLM's proxy was ever set.
+  # A feed that answers directly never touches it. Appended rather than
+  # inserted, for the same positional reason as the block above.
+  env {
+    name  = "FEED_PROXY_URL"
+    value = var.PROXY
+  }
 }
