@@ -56,4 +56,17 @@ resource "portainer_stack" "shorts" {
     name  = "LLM_GROQ_SMALL_KEY"
     value = var.LLM_GROQ_KEY
   }
+
+  # A container's clock is UTC, and the digest's schedule is read in this zone
+  # — without it an 08:00 daily digest is built at 11:00 Moscow time, which is
+  # the wrong end of the morning to be handed the morning's reading. The times
+  # themselves stay on the app's defaults (08:00 daily, Sun 19:00 weekly), and
+  # the Settings dialog still wins over all three.
+  #
+  # Kept last on purpose: the provider keys env blocks by position, so a new
+  # one inserted higher up renames every block below it in the plan.
+  env {
+    name  = "DIGEST_TZ"
+    value = "Europe/Moscow"
+  }
 }
