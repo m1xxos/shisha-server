@@ -45,9 +45,11 @@ resource "portainer_stack" "shorts" {
     value = "https://api.groq.com/openai/v1"
   }
 
+  # Groq withdrew the Llama models in August 2026; this is the small
+  # gpt-oss, which is what the app's own preset now points at.
   env {
     name  = "LLM_GROQ_SMALL_MODEL"
-    value = "llama-3.1-8b-instant"
+    value = "openai/gpt-oss-20b"
   }
 
   env {
