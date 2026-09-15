@@ -31,4 +31,11 @@ resource "portainer_stack" "games" {
     name  = "AUTH_URL"
     value = "https://games.home.m1xxos.online"
   }
+
+  # Kept last on purpose: the provider keys env blocks by position, so a new
+  # one inserted higher up renames every block below it in the plan.
+  env {
+    name  = "STEAM_API_KEY"
+    value = var.STEAM_API_KEY
+  }
 }

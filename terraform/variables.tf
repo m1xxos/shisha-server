@@ -92,3 +92,11 @@ variable "LLM_GROQ_KEY" {
   sensitive = true
   default   = ""
 }
+
+# Steam Web API key for the game library import. Empty is fine: the nav entry,
+# the onboarding step and /steam all hide themselves when it is unset.
+variable "STEAM_API_KEY" {
+  type      = string
+  sensitive = true
+  default   = ""
+}
