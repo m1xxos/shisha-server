@@ -57,25 +57,11 @@ resource "portainer_stack" "shorts" {
     value = var.LLM_GROQ_KEY
   }
 
-  # A container's clock is UTC, and the digest's schedule is read in this zone
-  # — without it an 08:00 daily digest is built at 11:00 Moscow time, which is
-  # the wrong end of the morning to be handed the morning's reading. The times
-  # themselves stay on the app's defaults (08:00 daily, Sun 19:00 weekly), and
-  # the Settings dialog still wins over all three.
-  #
-  # Kept last on purpose: the provider keys env blocks by position, so a new
-  # one inserted higher up renames every block below it in the plan.
   env {
     name  = "DIGEST_TZ"
     value = "Europe/Moscow"
   }
 
-  # Eleven feeds fail on every refresh from this host — Harper's, the
-  # Cloudflare blog, half the Substacks — not with a 403 but with a connection
-  # that never completes. The app has always fallen back to a proxy for those;
-  # it had nothing to fall back to, because only the LLM's proxy was ever set.
-  # A feed that answers directly never touches it. Appended rather than
-  # inserted, for the same positional reason as the block above.
   env {
     name  = "FEED_PROXY_URL"
     value = var.PROXY
