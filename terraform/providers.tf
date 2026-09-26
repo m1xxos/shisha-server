@@ -2,7 +2,7 @@ terraform {
   required_providers {
     portainer = {
       source  = "portainer/portainer"
-      version = "1.35.0"
+      version = "2.0.0"
     }
     random = {
       source  = "hashicorp/random"
