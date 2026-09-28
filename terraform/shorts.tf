@@ -12,9 +12,6 @@ resource "portainer_stack" "shorts" {
   pull_image                = true
   force_update              = false
 
-  # The digest writes its card blurbs with a language model. All of this is
-  # optional — with LLM_GROQ_KEY empty the digest still builds and falls back
-  # to the articles' own opening lines.
   env {
     name  = "LLM_PROVIDERS"
     value = var.LLM_GROQ_KEY == "" ? "" : "groq"
@@ -25,8 +22,6 @@ resource "portainer_stack" "shorts" {
     value = var.LLM_GROQ_KEY
   }
 
-  # Groq geo-blocks and answers 403 without this. Only the provider calls are
-  # routed through it; feeds and article covers keep going out directly.
   env {
     name  = "LLM_PROXY_URL"
     value = var.PROXY
