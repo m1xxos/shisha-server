@@ -21,6 +21,15 @@ services:
       DIGEST_TZ: ${DIGEST_TZ:-}
       DIGEST_DAILY_AT: ${DIGEST_DAILY_AT:-}
       DIGEST_WEEKLY_AT: ${DIGEST_WEEKLY_AT:-}
+      APP_URL: ${APP_URL:-https://shorts.home.m1xxos.online}
+      GMAIL_USER: ${GMAIL_USER:-}
+      GMAIL_APP_PASSWORD: ${GMAIL_APP_PASSWORD:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_SECURE: ${SMTP_SECURE:-}
+      SMTP_FROM: ${SMTP_FROM:-}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.shorts.entrypoints=websecure"

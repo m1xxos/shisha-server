@@ -61,4 +61,19 @@ resource "portainer_stack" "shorts" {
     name  = "FEED_PROXY_URL"
     value = var.PROXY
   }
+
+  env {
+    name  = "APP_URL"
+    value = "https://shorts.home.m1xxos.online"
+  }
+
+  env {
+    name  = "GMAIL_USER"
+    value = var.GMAIL_USER
+  }
+
+  env {
+    name  = "GMAIL_APP_PASSWORD"
+    value = var.GMAIL_APP_PASSWORD
+  }
 }

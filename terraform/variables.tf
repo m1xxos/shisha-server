@@ -100,3 +100,16 @@ variable "STEAM_API_KEY" {
   sensitive = true
   default   = ""
 }
+
+# Gmail and generic SMTP credentials for magShorts weekly digest email delivery.
+variable "GMAIL_USER" {
+  type      = string
+  sensitive = true
+  default   = ""
+}
+
+variable "GMAIL_APP_PASSWORD" {
+  type      = string
+  sensitive = true
+  default   = ""
+}
