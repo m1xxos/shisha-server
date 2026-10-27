@@ -17,7 +17,7 @@ services:
       interval: 15s
       retries: 3
     restart: unless-stopped
-    dns: 
+    dns:
     - 9.9.9.9
     networks:
       - proxy
@@ -99,7 +99,25 @@ services:
     - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
     - "traefik.http.routers.prowlarr.tls=true"
     - "traefik.docker.network=traefik_proxy"
-  
+
+  byparr:
+    image: ghcr.io/thephaseless/byparr:3.0.4
+    container_name: byparr
+    restart: unless-stopped
+    expose:
+      - "8191"
+    environment:
+      - PORT=8191
+      - LOG_LEVEL=info
+      - TZ=Europe/Moscow
+      - PROXY_SERVER=http://192.168.1.77:1080
+    shm_size: "1gb"
+    # tmpfs:
+    #   - /tmp:exec,mode=1777,size=1G
+    #   - /cache:mode=1777,size=512M
+    networks:
+      - arr
+
   lidarr:
     image: lscr.io/linuxserver/lidarr:3.1.6-nightly
     container_name: lidarr
@@ -125,7 +143,7 @@ services:
     - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
     - "traefik.http.routers.lidarr.tls=true"
     - "traefik.docker.network=traefik_proxy"
-  
+
   cleanuparr:
     image: ghcr.io/cleanuparr/cleanuparr:2.10.12
     container_name: cleanuparr
@@ -178,7 +196,7 @@ volumes:
   downloads:
     external:
       name: downloads
- 
+
 networks:
   proxy:
     external:
