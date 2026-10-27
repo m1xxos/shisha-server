@@ -101,7 +101,7 @@ services:
     - "traefik.docker.network=traefik_proxy"
 
   byparr:
-    image: ghcr.io/thephaseless/byparr:v3.0.4
+    image: ghcr.io/thephaseless/byparr:3.0.4
     container_name: byparr
     restart: unless-stopped
     expose:
