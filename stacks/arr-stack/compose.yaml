@@ -101,7 +101,7 @@ services:
     - "traefik.docker.network=traefik_proxy"
 
   byparr:
-    image: ghcr.io/thephaseless/byparr:3.0.4
+    image: ghcr.io/thephaseless/byparr:3.1.1
     container_name: byparr
     restart: unless-stopped
     expose:
@@ -119,7 +119,7 @@ services:
       - arr
 
   lidarr:
-    image: lscr.io/linuxserver/lidarr:3.2.0-nightly
+    image: lscr.io/linuxserver/lidarr:3.2.1-nightly
     container_name: lidarr
     environment:
     - PUID=568
