@@ -20,6 +20,8 @@ services:
     # resolve propagation checks against public DNS; the docker embedded
     # resolver (127.0.0.11) answers NXDOMAIN for _acme-challenge records
     - "--certificatesresolvers.based.acme.dnsChallenge.resolvers=1.1.1.1:53,8.8.8.8:53"
+    - "--certificatesresolvers.based.acme.dnsChallenge.propagation.delayBeforeChecks=30s"
+    - "--certificatesresolvers.based.acme.dnsChallenge.propagation.disableANSChecks=true"
     - "--metrics.prometheus=true"
     - "--accesslog=true"
     env_file:
