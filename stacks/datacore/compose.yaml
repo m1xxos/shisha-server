@@ -1,0 +1,28 @@
+services:
+  web:
+    image: m1xxos/datacore:latest
+    container_name: datacore-web
+    restart: unless-stopped
+    expose:
+      - "3000"
+    volumes:
+      - datacore-data:/app/.data
+    networks:
+      - proxy
+    environment:
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.datacore.entrypoints=websecure"
+      - "traefik.http.routers.datacore.rule=Host(`data.m1xxos.online`)"
+      - "traefik.http.services.datacore.loadbalancer.server.port=3000"
+      - "traefik.http.routers.datacore.tls.certresolver=based"
+      - "traefik.docker.network=traefik_proxy"
+
+volumes:
+  datacore-data:
+
+networks:
+  proxy:
+    external:
+      name: traefik_proxy
