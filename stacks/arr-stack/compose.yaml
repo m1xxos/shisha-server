@@ -18,7 +18,7 @@ services:
       retries: 3
     restart: unless-stopped
     dns:
-    - 9.9.9.9
+    - 192.168.1.77
     networks:
       - proxy
     labels:
