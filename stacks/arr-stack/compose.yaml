@@ -117,7 +117,7 @@ services:
       - arr
 
   lidarr:
-    image: lscr.io/linuxserver/lidarr:3.2.1-nightly
+    image: lscr.io/linuxserver/lidarr:4.0.0-nightly
     container_name: lidarr
     environment:
     - PUID=568
