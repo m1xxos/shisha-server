@@ -75,7 +75,7 @@ services:
     - "traefik.http.routers.sonarr.tls=true"
 
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:3.0.2
+    image: lscr.io/linuxserver/prowlarr:3.1.0
     container_name: prowlarr
     environment:
     - PUID=568
@@ -143,7 +143,7 @@ services:
     - "traefik.docker.network=traefik_proxy"
 
   cleanuparr:
-    image: ghcr.io/cleanuparr/cleanuparr:2.11.1
+    image: ghcr.io/cleanuparr/cleanuparr:2.11.2
     container_name: cleanuparr
     restart: unless-stopped
     expose:
