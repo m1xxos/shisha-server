@@ -9,7 +9,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
-    image: infisical/infisical:v0.167.14 # PIN THIS TO A SPECIFIC TAG
+    image: infisical/infisical:v0.167.17 # PIN THIS TO A SPECIFIC TAG
     env_file: 
       - .env
     environment:
@@ -26,7 +26,7 @@ services:
     - "traefik.docker.network=traefik_proxy"
 
   redis:
-    image: redis:8.10.3-alpine
+    image: redis:8.12.0-alpine
     container_name: infisical-dev-redis
     env_file: 
       - .env
